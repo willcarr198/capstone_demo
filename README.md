@@ -1,4 +1,4 @@
-This is a project template for ECE 5780, Embedded Systems.
+This is a copy of the stm template, which will be used for a capstone demo
 
 # Installation
 ## VSCode
