@@ -2,7 +2,7 @@
 #include <stdint.h>
 
 void SystemClock_Config(void);
-int lab1_main(void);
+int uart_main(void);
 int lab2_main(void);
 int lab3_main(void);
 int lab4_main(void);
