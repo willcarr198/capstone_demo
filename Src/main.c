@@ -5,8 +5,8 @@ int main(void)
 {
   #if defined(UART)
   uart_main();
-  #elif defined(LAB2)
-  lab2_main();
+  #elif defined(ADC)
+  adc_in_main();
   #elif defined(LAB3)
   lab3_main();
   #elif defined(LAB4)

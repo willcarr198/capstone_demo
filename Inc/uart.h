@@ -8,6 +8,7 @@ void USART3_4_IRQHandler(void);
 
 //void uart_main();
 void uart_final();
+void uart_init();
 void usart_char_writer(char c);
 void usart_string_writer(char* str);
 void usart_reader();
