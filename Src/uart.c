@@ -106,7 +106,7 @@ void uart_final()
     {
 
         incoming_num = incoming_char;
-        usart_string_writer("Command entered, conduction test\n");
+        usart_string_writer("Command entered, conducting test\n");
     }
     else
     {
@@ -117,11 +117,11 @@ void uart_final()
     usart_adc_probe(incoming_num == '1');
     // uint16_t targetted_GPIO;
 
-    usart_string_writer("Command Executed: ");
-    usart_char_writer(incoming_function);
-    usart_char_writer(incoming_num);
-    usart_string_writer(" has been toggled.");
-    usart_char_writer(0x00);
+    //usart_string_writer("Command Executed: ");
+    //usart_char_writer(incoming_function);
+    //usart_char_writer(incoming_num);
+    //usart_string_writer(" has been toggled.");
+    //usart_char_writer(0x00);
     // usart_char_writer('\n');
     // usart_char_writer(0x0D);
     // usart_char_writer(0x04);
@@ -194,6 +194,7 @@ void usart_adc_probe(uint8_t which_pin)
     uint32_t output = 0;
     while (1)
     {
+        //HAL_Delay(1);
         count++;
         // usart_string_writer("Count: ");
         // write_digits(count);
@@ -211,39 +212,23 @@ void usart_adc_probe(uint8_t which_pin)
         // HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_9);
         output = ADC1->DR;
         // break;
-        if (count > 100)
+        if (count > 5)
             break;
-        /*
-        usart_string_writer("volts: ");
-        write_digits(output);
-        usart_char_writer('\n');
-        usart_char_writer(0x0D);
-        */
-        // uint32_t holdForWrite = volts;
-        // if(count > 10) break;
-
-        // usart_string_writer("Volts: ");
-        // write_digits(volts);
-        // usart_char_writer('\n');
-        // usart_char_writer(0x0D);
-        //  count += 1;
-        //  usart_char_writer(count);
-        //   usart_char_writer(volts);
+        
+        
+        
     }
-    usart_string_writer("Volts: ");
-    write_digits(output);
-    usart_char_writer('\n');
-    usart_char_writer(0x0D);
+    
     if (output < 100 && (!which_pin))
     {
-        usart_string_writer("Test Passed");
+        usart_string_writer("Test 0 Passed");
     }
     else if (output > 100 && (!which_pin))
-        usart_string_writer("Test Failed");
+        usart_string_writer("Test 0 Failed");
     else if (output > 100 && (which_pin))
-        usart_string_writer("Test Passed");
+        usart_string_writer("Test 1 Passed");
     else
-        usart_string_writer("Test Failed");
+        usart_string_writer("Test 1 Failed");
     ADC1->CR |= ADC_CR_ADSTP_Msk;
     while (!(ADC1->CR & ADC_CR_ADSTP_Msk))
         ;
@@ -253,7 +238,6 @@ void usart_adc_probe(uint8_t which_pin)
         ;
     // PC3 is t0, and pulled up
     // PC1 is t1, and is pulled down
-    //  NVIC_EnableIRQ(ADC1_IRQn);
 }
 void usart_reader()
 {
@@ -286,9 +270,7 @@ void usart_reader()
 }
 void usart_char_writer(char c)
 {
-    // volatile uint8_t status;
-    // volatile int hold;
-    // volatile int hold2 = USART3->TDR;
+    
     while ((USART3->ISR & USART_ISR_TXE) != USART_ISR_TXE)
     {
         // hold = USART3->ISR;
